@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node index.js",
     "build:ui": "rm -rf dist && cd ../frontend && pnpm build && cp -r dist ../backend",
-    "deploy:full": "pnpm build:ui && git add . && git commit -m uibuild && git push"
+    "deploy:full": "pnpm build:ui && cd .. && git add . && git commit -m uibuild && git push"
   },
   "devDependencies": {
     "@types/bun": "latest"
