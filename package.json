@@ -1,6 +1,6 @@
 {
   "name": "helsinki_fso_part-03_backend",
-  "module": "index.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
