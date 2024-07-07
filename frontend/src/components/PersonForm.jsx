@@ -13,16 +13,24 @@ const PersonForm = ({ persons, newName, newNum, setNewName, setNewNum, setPerson
     const personInPhoneBook = persons.find(person => person.name.toLocaleLowerCase() === newName.toLocaleLowerCase())
 
     if (!personInPhoneBook) {
+      console.log(`not in db`)
       personService
         .create(tempPerson)
         .then(response => {
-          setNotification({ type: "success", message: `Added ${newName}` })
 
           setPersons(persons.concat(response))
           setNewName("")
           setNewNum('')
 
+          setNotification({ type: "success", message: `Added ${newName}` })
+          setTimeout(() => {
+            setNotification({ type: "blanck" })
+          }, 5000);
+        })
+        .catch(err => {
+          console.log('err', err.response.data.error)
 
+          setNotification({ type: "error", message: err.response.data.error })
           setTimeout(() => {
             setNotification({ type: "blanck" })
           }, 5000);
@@ -45,9 +53,11 @@ const PersonForm = ({ persons, newName, newNum, setNewName, setNewNum, setPerson
             }, 5000);
 
           })
-          .catch(() => {
+          .catch((err) => {
 
-            setNotification({ type: "error", message: `${newName} has already been removed from server.` })
+            // setNotification({ type: "error", message: `${newName} has already been removed from server.` })
+            console.log('err', err)
+            setNotification({ type: "error", message: err.response.data.error })
             setTimeout(() => {
               setNotification({ type: "blanck" })
             }, 5000);
