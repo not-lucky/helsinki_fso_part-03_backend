@@ -38,6 +38,12 @@ const PersonForm = ({ persons, newName, newNum, setNewName, setNewNum, setPerson
             console.log('older person', personInPhoneBook)
             console.log('update person', res)
             setPersons(persons.map(person => personInPhoneBook.id !== person.id ? person : res))
+
+            setNotification({ type: "success", message: `${newName} has been updated in the server.` })
+            setTimeout(() => {
+              setNotification({ type: "blanck" })
+            }, 5000);
+
           })
           .catch(() => {
 

@@ -1,18 +1,20 @@
 GET http://localhost:3001/api/persons HTTP/1.1
 
+GET http://localhost:3001/info HTTP/1.1
 
-GET http://localhost:3001/api/persons/2 HTTP/1.1
+GET http://localhost:3001/api/persons/6689f9e838409ba0845350d5 HTTP/1.1
 
 
-DELETE http://localhost:3001/api/persons/3
+DELETE http://localhost:3001/api/persons/668a8b65b9b1dd0a412972a5
 
 
 POST http://localhost:3001/api/persons HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "cqbzymxuoasypx",
-    "number": "HTML is easy"
+  "name": "Mary Poppendieck",
+  "number": "39-23-6423122",
+  "id": "6689f9e838409ba0845350d5"
 }
 
 
