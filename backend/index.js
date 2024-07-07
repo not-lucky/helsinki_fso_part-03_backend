@@ -20,6 +20,44 @@ app.use(express.json())
 morgan.token('body', (req) => JSON.stringify(req.body))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
+// const fillDB = () => {
+
+//   const persons = [
+//     {
+//       "name": "Dan Abramov",
+//       "number": "12-43234345",
+//       "id": "6689f9e838409ba0845350d4"
+//     },
+//     {
+//       "name": "Mary Poppendieck",
+//       "number": "39-236423122",
+//       "id": "6689f9e838409ba0845350d5"
+//     },
+//     {
+//       "name": "Ada Lovelace",
+//       "number": "39-445323523",
+//       "id": "6689f9e838409ba0845350d3"
+//     },
+//     {
+//       "name": "Arto Hellas",
+//       "number": "040-123456",
+//       "id": "6689f9e838409ba0845350d2"
+//     },
+//   ]
+
+
+//   app.get('/api/persons', (req, res, next) => {
+//     persons.forEach(p => {
+//       new Person({
+//         name: p.name,
+//         number: p.number
+//       }).save().then(res => console.log(`${res.name} saved`))
+//     })
+
+//   })
+// }
+
+// fillDB()
 
 app.get('/api/persons', (request, response, next) => {
   Person
@@ -71,33 +109,6 @@ const generateId = () => {
 app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
-  if (!body.name) {
-    response.status(400).json({
-      error: 'name missing'
-    })
-    return
-  }
-
-  if (!body.number) {
-    response.status(400).json({
-      error: 'number missing'
-    })
-    return
-  }
-
-  // if (Person.find(person => person.name === body.name)) {
-  //   response.status(409).json({
-  //     error: 'name must be unique'
-  //   })
-  //   return
-  // }
-
-  // const person = {
-  //   id: generateId(),
-  //   name: body.name,
-  //   number: body.number,
-  // }
-
   const person = new Person({
     // id: generateId(),
     name: body.name,
@@ -115,14 +126,17 @@ app.post('/api/persons', (request, response, next) => {
 
 app.put('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
+  const { name, number } = request.body
 
   const note = {
-    name: request.body.name,
-    number: request.body.number
+    name, number
   }
 
   Person
-    .findByIdAndUpdate(id, note, { new: true })
+    .findByIdAndUpdate(
+      id,
+      note,
+      { new: true, runValidators: true, context: 'query' })
     .then(updatedNote => {
       response.json(updatedNote)
     })
@@ -141,7 +155,9 @@ const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
   if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
+    return response.status(400).json({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
   }
 
   next(error)

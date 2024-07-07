@@ -2,19 +2,35 @@ GET http://localhost:3001/api/persons HTTP/1.1
 
 GET http://localhost:3001/info HTTP/1.1
 
-GET http://localhost:3001/api/persons/6689f9e838409ba0845350d5 HTTP/1.1
+GET http://localhost:3001/api/persons/668aae3131385ac742baa7f5 HTTP/1.1
 
 
-DELETE http://localhost:3001/api/persons/668a8b65b9b1dd0a412972a5
+DELETE http://localhost:3001/api/persons/668aaef74c6c89e56221f10f
 
 
 POST http://localhost:3001/api/persons HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Mary Poppendieck",
-  "number": "39-23-6423122",
-  "id": "6689f9e838409ba0845350d5"
+  "name": "asasd",
+  "number": "393-6423122"
+}
+
+PUT http://localhost:3001/api/persons/668aa16a7caa040c3ea674cf HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "as",
+  "number": "39-23-6423122"
+}
+
+
+PUT http://localhost:3001/api/persons/668aa64406d55d5ecc1fddcb HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "aswrf3rv",
+  "number": "31-64231"
 }
 
 
