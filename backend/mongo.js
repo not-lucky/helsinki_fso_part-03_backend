@@ -10,28 +10,28 @@ const name = process.argv[3]
 const number = process.argv[4]
 
 
-const persons = [
-  {
-    "id": 1,
-    "name": "Arto Hellas",
-    "number": "040-123456"
-  },
-  {
-    "id": 2,
-    "name": "Ada Lovelace",
-    "number": "39-44-5323523"
-  },
-  {
-    "id": 3,
-    "name": "Dan Abramov",
-    "number": "12-43-234345"
-  },
-  {
-    "id": 4,
-    "name": "Mary Poppendieck",
-    "number": "39-23-6423122"
-  }
-]
+// const persons = [
+//   {
+//     'id': 1,
+//     'name': 'Arto Hellas',
+//     'number': '040-123456'
+//   },
+//   {
+//     'id': 2,
+//     'name': 'Ada Lovelace',
+//     'number': '39-44-5323523'
+//   },
+//   {
+//     'id': 3,
+//     'name': 'Dan Abramov',
+//     'number': '12-43-234345'
+//   },
+//   {
+//     'id': 4,
+//     'name': 'Mary Poppendieck',
+//     'number': '39-23-6423122'
+//   }
+// ]
 
 const url = `mongodb+srv://replicasizedrank:${password}@cluster0.ka6nbmh.mongodb.net/phonebook?retryWrites=true&w=majority&appName=Cluster0`
 
@@ -67,7 +67,7 @@ if (name && number) {
 
   person
     .save()
-    .then(result => {
+    .then(() => {
       console.log(`${name} saved successfully`)
       mongoose.connection.close()
     })

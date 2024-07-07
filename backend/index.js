@@ -5,8 +5,8 @@ const cors = require('cors')
 const Person = require('./models/person')
 
 
-const MAX = 100000000000
-const MIN = 10
+// const MAX = 100000000000
+// const MIN = 10
 
 
 
@@ -97,14 +97,14 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
   Person
     .findByIdAndDelete(id)
-    .then(result => response.status(204).end())
+    .then(() => response.status(204).end())
     .catch(err => next(err))
 })
 
 
-const generateId = () => {
-  return Math.floor((Math.random() * (MAX - MIN + 1)) + MIN).toString()
-}
+// const generateId = () => {
+//   return Math.floor((Math.random() * (MAX - MIN + 1)) + MIN).toString()
+// }
 
 app.post('/api/persons', (request, response, next) => {
   const body = request.body

@@ -3,11 +3,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "lint": "eslint .",
     "build:ui": "rm -rf dist && cd ../frontend && pnpm build && cp -r dist ../backend",
     "deploy:full": "pnpm build:ui && cd .. && git add . && git commit -m uibuild && git push"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@eslint/js": "^9.6.0",
+    "@stylistic/eslint-plugin-js": "^2.3.0",
+    "@types/bun": "latest",
+    "eslint": "9.x",
+    "globals": "^15.8.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
