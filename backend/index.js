@@ -21,7 +21,7 @@ const errorHandler = ( error, request, response, next ) => {
   next( error );
 };
 
-// app.use( express.static( 'dist' ) );
+app.use( express.static( 'dist' ) );
 app.use( express.json() );
 
 morgan.token( 'body', ( req ) => JSON.stringify( req.body ) );
